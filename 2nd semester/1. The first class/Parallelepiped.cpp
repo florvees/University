@@ -13,13 +13,13 @@ namespace df
 
     parallelepiped::~parallelepiped()
     {
-        std::cout << "The parallelepiped, which location is " << this << ", just disappeared!" << std::endl;
+        std::cout << "\nThe parallelepiped, which location is " << this << ", just disappeared!" << std::endl;
     }
 
     int parallelepiped::areas()
     {
         short face_number;
-        std::cout << "Which face do you need? \n1.(x and y) \n2.(x and z) \n3.(y and z)" << std::endl;
+        std::cout << "\nWhich face do you need? \n1.(x and y) \n2.(x and z) \n3.(y and z)\n" << std::endl;
         std::cin >> face_number;
         switch (face_number)
         {
