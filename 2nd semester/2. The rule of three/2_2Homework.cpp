@@ -52,11 +52,7 @@ public:
         for (int i = 0; i < other.row_amount; i++)
         {
             matrix[i] = new int[other.row_amount];
-        }
-
-        for (int i = 0; i < other.row_amount; i++)
-        {
-            for (int j = 0; j < column_amount; j++)
+            for (int j = 0; j < other.column_amount; j++)
             {
                 matrix[i][j] = other.matrix[i][j];
             }
@@ -122,7 +118,7 @@ public:
 
     void read()
     {
-
+        std::cout << "===" << std::endl;
         for (int i = 0; i < row_amount; i++)
         {
             for (int j = 0; j < column_amount; j++)
@@ -131,6 +127,7 @@ public:
             }
             std::cout << std::endl;
         }
+        std::cout << "===" << std::endl;
     }
 
     void set_values()
@@ -154,7 +151,6 @@ int main()
     b.set_values();
 
     a.read();
-
     a = b;
 
     a.read();
