@@ -1,0 +1,148 @@
+﻿#include <iostream>
+#include <string>
+
+class Matrix
+{
+private:
+    int row_amount;
+    int column_amount;
+    int** matrix;
+public:
+    Matrix(int row_amount, int column_amout)
+    {
+        this->row_amount = row_amount;
+        this->column_amount = column_amout;
+        matrix = new int*[row_amount];
+        for (int i = 0; i < row_amount; i++)
+        {
+            matrix[i] = new int[column_amout];
+        }
+    }
+    Matrix(const Matrix& other)
+    {
+        this->row_amount = other.row_amount;
+        this->column_amount = other.column_amount;
+        matrix = new int* [row_amount];
+        for (int i = 0; i < row_amount; i++)
+        {
+            matrix[i] = new int[row_amount];
+        }
+    }
+    ~Matrix()
+    {
+        for (int i = 0; i < row_amount; i++)
+        {
+            delete[] matrix[i];
+        }
+        delete[] matrix;
+    }
+
+    Matrix& operator=(const Matrix& other)
+    {
+        for (int i = 0; i < row_amount; i++)
+        {
+            delete[] matrix[i];
+        }
+        delete[] matrix;
+
+        this->row_amount = other.row_amount;
+        this->column_amount = other.column_amount;
+        matrix = new int* [row_amount];
+        for (int i = 0; i < row_amount; i++)
+        {
+            matrix[i] = new int[row_amount];
+        }
+    }
+
+    int& operator()(int row, int column)
+    {
+        return matrix[row][column];
+    }
+
+    /*Matrix operator+(const Matrix& other)
+    {
+        if (this->row_amount != other.row_amount || this->column_amout != other.column_amout)
+        {
+            return *this;
+        }
+        else
+        {
+            Matrix tmp = *this;
+
+            for (int i = 0; i < tmp.row_amount; i++)
+            {
+                for (int j = 0; j < tmp.column_amout; j++)
+                {
+                    tmp.matrix[i][j] += other.matrix[i][j];
+                }
+                std::cout << std::endl;
+            }
+            return tmp;
+        }
+    }
+
+    Matrix operator-(const Matrix& other)
+    {
+        if (this->row_amount != other.row_amount || this->column_amout != other.column_amout)
+        {
+            return *this;
+        }
+        else
+        {
+            Matrix tmp = *this;
+
+            for (int i = 0; i < tmp.row_amount; i++)
+            {
+                for (int j = 0; j < tmp.column_amout; j++)
+                {
+                    tmp.matrix[i][j] -= other.matrix[i][j];
+                }
+                std::cout << std::endl;
+            }
+            return tmp;
+        }
+    }*/
+
+    void read()
+    {
+        std::string border;
+        for (int i = 0; i < column_amount*2 - 1; i++)
+        {
+            border.append("=");
+        }
+
+        std::cout << border << std::endl;
+        for (int i = 0; i < row_amount; i++)
+        {
+            for (int j = 0; j < column_amount; j++)
+            {
+                std::cout << matrix[i][j] << " ";
+            }
+            std::cout << std::endl;
+        }
+        std::cout << border << std::endl;
+    }
+
+    void set_values()
+    {
+        for (int i = 0; i < row_amount; i++)
+        {
+            for (int j = 0; j < column_amount; j++)
+            {
+                std::cin >> matrix[i][j];
+            }
+        }
+    }
+
+};
+
+int main()
+{
+    Matrix a(2, 2);
+    a.set_values();
+    a.read();
+    a(1, 1) = 5;
+    a.read();
+
+    return 0;
+}
