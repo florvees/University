@@ -47,11 +47,22 @@ public:
 
         this->row_amount = other.row_amount;
         this->column_amount = other.column_amount;
-        matrix = new int* [row_amount];
-        for (int i = 0; i < row_amount; i++)
+        matrix = new int* [other.row_amount];
+
+        for (int i = 0; i < other.row_amount; i++)
         {
-            matrix[i] = new int[row_amount];
+            matrix[i] = new int[other.row_amount];
         }
+
+        for (int i = 0; i < other.row_amount; i++)
+        {
+            for (int j = 0; j < column_amount; j++)
+            {
+                matrix[i][j] = other.matrix[i][j];
+            }
+        }
+
+        return *this;
     }
 
     int& operator()(int row, int column)
@@ -59,31 +70,37 @@ public:
         return matrix[row][column];
     }
 
-    /*Matrix operator+(const Matrix& other)
+    /*Matrix operator+(Matrix other)
     {
-        if (this->row_amount != other.row_amount || this->column_amout != other.column_amout)
+        if (this->row_amount != other.row_amount || this->column_amount != other.column_amount)
         {
+            std::cout << "You cannot do this action!" << std::endl;
             return *this;
         }
         else
         {
-            Matrix tmp = *this;
+            Matrix tmp(row_amount, column_amount);
+            tmp.row_amount = this->row_amount;
+            tmp.column_amount = this->column_amount;
 
             for (int i = 0; i < tmp.row_amount; i++)
             {
-                for (int j = 0; j < tmp.column_amout; j++)
+                for (int j = 0; j < tmp.column_amount; j++)
                 {
-                    tmp.matrix[i][j] += other.matrix[i][j];
+                    tmp(i,j) = this->matrix[i][j] + other.matrix[i][j];
                 }
                 std::cout << std::endl;
             }
+
+            tmp.read();
+
             return tmp;
         }
-    }
+    }*/
 
-    Matrix operator-(const Matrix& other)
+    /*Matrix operator-(const Matrix other)
     {
-        if (this->row_amount != other.row_amount || this->column_amout != other.column_amout)
+        if (this->row_amount != other.row_amount || this->column_amount != other.column_amount)
         {
             return *this;
         }
@@ -93,9 +110,9 @@ public:
 
             for (int i = 0; i < tmp.row_amount; i++)
             {
-                for (int j = 0; j < tmp.column_amout; j++)
+                for (int j = 0; j < tmp.column_amount; j++)
                 {
-                    tmp.matrix[i][j] -= other.matrix[i][j];
+                    tmp.matrix[i][j] = this->matrix[i][j] - other.matrix[i][j];
                 }
                 std::cout << std::endl;
             }
@@ -105,13 +122,7 @@ public:
 
     void read()
     {
-        std::string border;
-        for (int i = 0; i < column_amount*2 - 1; i++)
-        {
-            border.append("=");
-        }
 
-        std::cout << border << std::endl;
         for (int i = 0; i < row_amount; i++)
         {
             for (int j = 0; j < column_amount; j++)
@@ -120,7 +131,6 @@ public:
             }
             std::cout << std::endl;
         }
-        std::cout << border << std::endl;
     }
 
     void set_values()
@@ -140,8 +150,13 @@ int main()
 {
     Matrix a(2, 2);
     a.set_values();
+    Matrix b(2, 2);
+    b.set_values();
+
     a.read();
-    a(1, 1) = 5;
+
+    a = b;
+
     a.read();
 
     return 0;
