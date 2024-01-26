@@ -66,55 +66,52 @@ public:
         return matrix[row][column];
     }
 
-    /*Matrix operator+(Matrix other)
-    {
-        if (this->row_amount != other.row_amount || this->column_amount != other.column_amount)
-        {
-            std::cout << "You cannot do this action!" << std::endl;
-            return *this;
-        }
-        else
-        {
-            Matrix tmp(row_amount, column_amount);
-            tmp.row_amount = this->row_amount;
-            tmp.column_amount = this->column_amount;
+    //Matrix operator+(const Matrix& other)
+    //{
+    //    if (this->row_amount != other.row_amount || this->column_amount != other.column_amount)
+    //    {
+    //        std::cout << "You cannot do this action!" << std::endl;
+    //        return *this;
+    //    }
+    //    else
+    //    {
+    //        Matrix tmp(*this);
 
-            for (int i = 0; i < tmp.row_amount; i++)
-            {
-                for (int j = 0; j < tmp.column_amount; j++)
-                {
-                    tmp(i,j) = this->matrix[i][j] + other.matrix[i][j];
-                }
-                std::cout << std::endl;
-            }
+    //        for (int i = 0; i < tmp.row_amount; i++)
+    //        {
+    //            for (int j = 0; j < tmp.column_amount; j++)
+    //            {
+    //                tmp.matrix[i][j] = this->matrix[i][j] + other.matrix[i][j];
+    //            }
+    //            std::cout << std::endl;
+    //        }
+    //        return tmp;
+    //    }
+    //}
 
-            tmp.read();
+    //Matrix operator-(const Matrix& other)
+    //{
+    //    if (this->row_amount != other.row_amount || this->column_amount != other.column_amount)
+    //    {
+    //        std::cout << "You cannot do this action!" << std::endl;
+    //        return *this;
+    //    }
+    //    else
+    //    {
+    //        Matrix tmp(*this);
 
-            return tmp;
-        }
-    }*/
-
-    /*Matrix operator-(const Matrix other)
-    {
-        if (this->row_amount != other.row_amount || this->column_amount != other.column_amount)
-        {
-            return *this;
-        }
-        else
-        {
-            Matrix tmp = *this;
-
-            for (int i = 0; i < tmp.row_amount; i++)
-            {
-                for (int j = 0; j < tmp.column_amount; j++)
-                {
-                    tmp.matrix[i][j] = this->matrix[i][j] - other.matrix[i][j];
-                }
-                std::cout << std::endl;
-            }
-            return tmp;
-        }
-    }*/
+    //        for (int i = 0; i < tmp.row_amount; i++)
+    //        {
+    //            for (int j = 0; j < tmp.column_amount; j++)
+    //            {
+    //                tmp.matrix[i][j] = this->matrix[i][j] - other.matrix[i][j];
+    //            }
+    //            std::cout << std::endl;
+    //        }
+    //        tmp.read();
+    //        return tmp;
+    //    }
+    //}
 
     void read()
     {
@@ -139,6 +136,7 @@ public:
                 std::cin >> matrix[i][j];
             }
         }
+        std::cout << std::endl;
     }
 
 };
@@ -151,9 +149,7 @@ int main()
     b.set_values();
 
     a.read();
-    a = b;
-
-    a.read();
+    b.read();
 
     return 0;
 }
