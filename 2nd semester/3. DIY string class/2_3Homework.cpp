@@ -1,6 +1,5 @@
 ﻿#include <iostream>
 
-
 class string
 {
 private:
@@ -17,9 +16,13 @@ public:
     {
         lenght = other.lenght;
         str = new char[lenght];
-        
         std::copy(other.str, other.str + lenght, str);
-    }   
+    }
+    ~string()
+    {
+        delete[] str;
+    }
+
     string& operator=(string copy)
     {
         delete[] str;
@@ -27,11 +30,8 @@ public:
         lenght = copy.lenght;
         str = new char[lenght];
         std::copy(copy.str, copy.str + lenght, str);
+
         return *this;
-    }
-    ~string()
-    {
-        delete[] str;
     }
 
     string& operator+=(const string& other)
@@ -146,7 +146,7 @@ public:
                 return i;
             }
         }
-        return 0;
+        exit(1);
     }
 
     size_t length()
@@ -178,13 +178,47 @@ std::ostream& operator<<(std::ostream& out, const string& other)
 
 int main()
 {
-    string test1 = "123";
-    string test2 = "456";
-    string test3 = "789";
+    string test1 = "abc";
+    string test2 = "def";
+    string test3 = "ghi";
+
     std::cout << test1 << std::endl;
     std::cout << test2 << std::endl;
     std::cout << test1 + test2 << std::endl;
+
     test1 = test2 + test3;
+
     std::cout << test1 << std::endl;
-    
+    std::cout << test1.find('g') << std::endl;
+    std::cout << test1.length() << std::endl;
+
+    if (test1 > test2)
+    {
+        std::cout << "True" << std::endl;
+    }
+    else
+    {
+        std::cout << "False" << std::endl;
+    }
+
+    if (test1 == test2)
+    {
+        std::cout << "True" << std::endl;
+    }
+    else
+    {
+        std::cout << "False" << std::endl;
+    }
+
+    if (test1 < test2)
+    {
+        std::cout << "True" << std::endl;
+    }
+    else
+    {
+        std::cout << "False" << std::endl;
+    }
+
+    test1.c_str();
+    test1.at(8);
 }
