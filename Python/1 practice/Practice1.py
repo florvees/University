@@ -25,11 +25,12 @@
     
 n = int(input())
 free_space = '  '*(n//10)
-free_space_test = ' '*((n//10)+1)
+free_space_test = '  '*((n//10)+1)
+
 for i in range(n):
-    print(free_space_test*(n-i-1),end=' ')
+    print(' '*(n-i-1),end=' ')
     for j in range(i+1):
-        print(j+1,end=free_space)
+        print(i-j+1,end=free_space)
     for j in range(i):
-        print(i-j,end=free_space)
-    print(free_space_test*(n-i-1),end='\n')
+        print(j+2,end=free_space)
+    print(' '*(n-i-1),end='\n')
