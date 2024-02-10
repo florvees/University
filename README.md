@@ -1,4 +1,4 @@
-Here I'll post my homeworks and maybe some univesity projects  
+Here I'll post my homework and maybe some university projects  
 
 ===  
   
