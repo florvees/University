@@ -4,23 +4,6 @@
 //N = row;
 //M = column;
 
-//template<typename T, int N, int M>
-//class Matrix;
-//
-//template<typename T, int N, int M>
-//std::ostream operator<<(std::ostream out, const Matrix<T, N, M>& object)
-//{
-//    for (int i = 0; i < N; i++)
-//    {
-//        for (int j = 0; j < M; j++)
-//        {
-//            out << object.matrix[i][j] << " ";
-//        }
-//        out << "\n";
-//    }
-//    return out;
-//}
-
 template<typename T, int N, int M>
 class Matrix
 {
