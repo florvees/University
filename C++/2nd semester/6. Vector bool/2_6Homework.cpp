@@ -24,31 +24,26 @@ namespace df
             m_bit_lenght = lenght % 8;
             m_current_size = 0;
             arr = new char[m_byte_lenght];
-            for (int i = 0; i < m_byte_lenght; i++)
-            {
-                arr[i] = 0b00000000;
-            }
         }
         ~vector<bool>()
         {
             delete[] arr;
         }
+        void push_back(bool boolean)
+        {
+                arr[m_current_size / 8] << 1;
+                arr[m_current_size / 8] |= boolean;
+                m_current_size++;
+        }
         size_t size()
         {
             return m_current_size;
-        }
-        void push_back(bool boolean)
-        {
-            arr[m_current_size / 8] |= boolean;
-            arr[m_current_size / 8] << 1;
-            m_current_size++;
         }
         bool operator[](int index)
         {
             char tmp_a = 0b00000001;    
             tmp_a << index % 8;
-            bool value = (arr[index / 8] & tmp_a) >> index % 8;
-            return value;
+            return (arr[index / 8] & tmp_a) >> index % 8;
         }
     };
 }
@@ -56,16 +51,19 @@ namespace df
 int main()  
 {
     df::vector<bool> test(12);
+    test.push_back(true);
+    test.push_back(true);
     test.push_back(false);
     test.push_back(true);
-    test.push_back(true);
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < 12; i++)
     {
-        std::cout << test[i];
+        if (test[i] == true)
+        {
+            std::cout << "True" << std::endl;
+        }
+        else
+        {
+            std::cout << "False" << std::endl;
+        }
     }
-    std::cout << '\n';
-    /*for (int i = 0; i < 18; i++)
-    {
-        std::cout << (i / 8) << std::endl;
-    }*/
 }
