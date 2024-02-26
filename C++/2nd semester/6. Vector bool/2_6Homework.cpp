@@ -20,7 +20,7 @@ namespace df
     public:
         vector<bool>(size_t lenght)
         {
-            m_byte_lenght = lenght / 8;
+            m_byte_lenght = lenght / 8 + 1;
             m_bit_lenght = lenght % 8;
             m_current_size = 0;
             arr = new char[m_byte_lenght];
@@ -45,7 +45,7 @@ namespace df
         }
         bool operator[](int index)
         {
-            char tmp_a = 0b1;    
+            char tmp_a = 0b00000001;    
             tmp_a << index % 8;
             bool value = (arr[index / 8] & tmp_a) >> index % 8;
             return value;
@@ -55,11 +55,11 @@ namespace df
 
 int main()  
 {
-    df::vector<bool> test(8);
-    test.push_back(true);
+    df::vector<bool> test(12);
     test.push_back(false);
     test.push_back(true);
-    for (int i = 0; i < 8; i++)
+    test.push_back(true);
+    for (int i = 0; i < 9; i++)
     {
         std::cout << test[i];
     }
