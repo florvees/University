@@ -38,8 +38,55 @@
 
 #Ex 3
 
-line = list(int(input("Enter your number: ")))
-print(line)
+line = list(str(input("Enter the line: ")))
+new_line = ""
+if (len(line) == 3):
+    match int(line[0]):
+        case 1: new_line += "сто "
+        case 2: new_line += "двести "
+        case 3: new_line += "триста "
+        case 4: new_line += "четыреста "
+        case 5: new_line += "пятьсот "
+        case 6: new_line += "шестьсот "
+        case 7: new_line += "семьсот "
+        case 8: new_line += "восемьсот "
+        case 9: new_line += "девятьсот "
+    line = line[1:]
+if (len(line) == 2):
+    match int(line[0]):
+        case 1: 
+            match int(line[1]):
+                case 1: new_line += "одиннадцать "
+                case 2: new_line += "двенадцать "
+                case 3: new_line += "тринадцать "
+                case 4: new_line += "четырнадцать "
+                case 5: new_line += "пятнадцать "
+                case 6: new_line += "шестнадцать "
+                case 7: new_line += "семьнадцать "
+                case 8: new_line += "восемнадцать "
+                case 9: new_line += "девятнадцать "
+            line = line[1:]
+        case 2: new_line += "двадцать "
+        case 3: new_line += "тридцать "
+        case 4: new_line += "сорок "
+        case 5: new_line += "пятьдесят "
+        case 6: new_line += "шестьдесят "
+        case 7: new_line += "семьдесят "
+        case 8: new_line += "восемьдесят "
+        case 9: new_line += "девяносто "
+    line = line[1:]
+if (len(line) == 1):
+    match int(line[0]):
+        case 1: new_line += "один "
+        case 2: new_line += "два "
+        case 3: new_line += "три "
+        case 4: new_line += "четыре "
+        case 5: new_line += "пять "
+        case 6: new_line += "шесть "
+        case 7: new_line += "семь "
+        case 8: new_line += "восемь "
+        case 9: new_line += "девять "
+print(new_line)
 
 # Ex 4
 
