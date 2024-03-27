@@ -13,14 +13,25 @@
 
 # Ex 3
 
-n = int(input("How many cities?"))
-cities = set()
-for i in range(n):
-    city = input("Please, enter the city: ").strip().lower()
-    if city in cities:
-        print("REPEAT")
-    else:
-        cities.add(city)
-        print("OK")
+# n = int(input("How many cities?"))
+# cities = set()
+# for i in range(n):
+#     city = input("Please, enter the city: ").strip().lower()
+#     if city in cities:
+#         print("REPEAT")
+#     else:
+#         cities.add(city)
+#         print("OK")
 
-        
+# Ex 4
+
+# line = list(str(input("Enter your line: ")).split())
+# for i in range(len(line)):
+#     print(line[:i].count(line[i]), end=" ")
+    
+# Ex 5
+
+
+
+# Ex 6
+
