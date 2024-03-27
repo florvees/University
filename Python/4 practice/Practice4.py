@@ -35,3 +35,9 @@
 
 # Ex 6
 
+# symbols = ',.!?:;"()\t\n'
+# text = str(input("Enter your text: "))
+# for i in symbols:
+#     text = text.replace(i, "")
+# text = text.split()
+# print("The asnwer is:\n" + "\n".join(sorted(sorted(set(text)), key=lambda word: text.count(word), reverse=True)))
