@@ -31,7 +31,21 @@
     
 # Ex 5
 
+# n = int(input())
 
+# consumers_dict = {}
+# for i in range(n):
+#     line = input().split()
+#     if line[0] not in consumers_dict:
+#         consumers_dict[line[0]] = [[line[1],line[2]]]
+#     else:
+#         consumers_dict[line[0]].append([line[1],line[2]])
+
+# IDs = list(consumers_dict.keys())
+# for i in range(len(IDs)):
+#     print("ID: "+IDs[i]+", покупки:")
+#     for j in range(len(consumers_dict[IDs[i]])):
+#         print(consumers_dict[IDs[i]][j][0], consumers_dict[IDs[i]][j][1])
 
 # Ex 6
 
