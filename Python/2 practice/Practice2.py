@@ -1,17 +1,46 @@
 # Ex 1
 
+# n = int(input())
+#
+# prev_str = [1]
+# for i in range(n):
+#     print(" "*(n-i), end='')
+#     print(*prev_str)
+#     current_str = prev_str.copy()
+#     current_str.append(1)
+#     for j in range(1, len(current_str) - 1):
+#         current_str[j] = prev_str[j - 1] + prev_str[j]
+#     prev_str = current_str
+
+# Ex 2
+
+def print_triangle_top(number):
+    if (number % 2) == 1:
+        print(' *  ', end='')
+    else:
+        print('    ', end='')
+
+
+def print_triangle_bottom(number):
+    if (number % 2) == 1:
+        print('* * ', end='')
+    else:
+        print('    ', end='')
+
 n = int(input())
 
 prev_str = [1]
 for i in range(n):
-    print(" "*(n-i), end='')
-    print(*prev_str)
+    print(" " * (n - i), end='')
+    for elem in prev_str:
+        print_triangle_top(elem)
+    print()
+    print(" " * (n - i), end='')
+    for elem in prev_str:
+        print_triangle_bottom(elem)
+    print()
     current_str = prev_str.copy()
     current_str.append(1)
     for j in range(1, len(current_str) - 1):
         current_str[j] = prev_str[j - 1] + prev_str[j]
     prev_str = current_str
-
-# Ex 2
-
-# хз
