@@ -20,7 +20,6 @@ def print_triangle_top(number):
     else:
         print('    ', end='')
 
-
 def print_triangle_bottom(number):
     if (number % 2) == 1:
         print('* * ', end='')
