@@ -14,29 +14,23 @@
 
 # Ex 2
 
-def print_triangle_top(number):
-    if (number % 2) == 1:
-        print(' *  ', end='')
-    else:
-        print('    ', end='')
-
-def print_triangle_bottom(number):
-    if (number % 2) == 1:
-        print('* * ', end='')
-    else:
-        print('    ', end='')
-
 n = int(input())
 
 prev_str = [1]
 for i in range(n):
     print(" " * (n - i), end='')
     for elem in prev_str:
-        print_triangle_top(elem)
+        if (elem % 2) == 1:
+            print(' *  ', end='')
+        else:
+            print('    ', end='')
     print()
     print(" " * (n - i), end='')
     for elem in prev_str:
-        print_triangle_bottom(elem)
+        if (elem % 2) == 1:
+            print('* * ', end='')
+        else:
+            print('    ', end='')
     print()
     current_str = prev_str.copy()
     current_str.append(1)
