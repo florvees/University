@@ -29,3 +29,13 @@
 #     file_older.write(data[-1][0]+" "+data[-1][1]+" "+str(data[-1][2]))
 
 # Ex 4
+
+import json
+import csv
+
+def json_to_csv(file_name):
+    with open("4th/"+file_name+".json", "r") as file:
+        json_data = json.load(file)
+    print(json_data)
+
+json_to_csv("input4")
