@@ -33,9 +33,17 @@
 import json
 import csv
 
-def json_to_csv(file_name):
-    with open("4th/"+file_name+".json", "r") as file:
-        json_data = json.load(file)
-    print(json_data)
 
-json_to_csv("input4")
+def json_to_csv(file_name):
+    with open("4th/" + file_name, "r") as file_in:
+        json_data = json.load(file_in)
+        main_key = list(json_data.keys())[0]
+    with open("4th/" + file_name[:-5] + ".csv", "w") as file_out:
+        csv_data = csv.DictWriter(file_out, json_data[main_key][0].keys())
+        csv_data.writeheader()
+        csv_data.writerows(json_data[main_key])
+
+
+json_to_csv("file.json")
+
+
