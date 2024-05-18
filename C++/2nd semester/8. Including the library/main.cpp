@@ -7,18 +7,18 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
+    sf::CircleShape circle_shape(100.f);
     sf::Font font;
-    sf::Music music;
-    music.openFromFile("music.flac");
-    music.setLoop(true);
-    music.setVolume(50);
-    music.play();
-    font.loadFromFile("NotoSans-Medium.ttf");
-    sf::Text text("\n\n\n\n\n\t\t\tHello world!", font);
+    sf::Music ambient;
+    ambient.openFromFile("real_matan.flac");
+    ambient.setLoop(true);
+    ambient.setVolume(50);
+    ambient.play();
+    font.loadFromFile("Comic Sans MS.ttf");
+    sf::Text text("\n\n\n\n\t\t\tDFM 2025", font);
     text.setCharacterSize(14);
     text.setStyle(sf::Text::Bold);
-    shape.setFillColor(sf::Color::Red);
+    circle_shape.setFillColor(sf::Color::Red);
 
     while (window.isOpen())
     {
@@ -30,7 +30,7 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        window.draw(circle_shape);
         window.draw(text);
         window.display();
     }

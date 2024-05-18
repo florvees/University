@@ -15,6 +15,9 @@ include_directories("ext/SFML/include/")
 link_directories("ext/SFML/lib/")	
 
 add_executable("${PROJECT_NAME}" main.cpp)
+
+file(COPY "real_matan.flac" DESTINATION "/")
+file(COPY "Comic Sans MS.ttf" DESTINATION "/")
 											
 target_link_libraries("${PROJECT_NAME}" sfml-graphics-s-d
 						  sfml-window-s-d
