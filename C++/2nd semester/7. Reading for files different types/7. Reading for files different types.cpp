@@ -12,20 +12,17 @@ protected:
 	std::string m_filename;
 	uint8_t* m_data;
 	uint8_t m_n;
-
 public:
 	DataReader(const std::string& filename) : m_filename(filename), m_n(0), m_data(nullptr) {}
-
 	virtual ~DataReader() {}
-
 	virtual bool Open() = 0;
+	virtual void Read() = 0;
+	virtual void Write() = 0;
+
 	void Close()
 	{
 		m_in.close();
 	}
-
-	virtual void Read() = 0;
-	virtual void Write() = 0;
 
 	void GetData(uint8_t* buf, uint8_t& n)
 	{
@@ -39,6 +36,7 @@ class TxtReader : public DataReader
 {
 public:
 	TxtReader(const std::string& filename) : DataReader(filename) {}
+
 	virtual ~TxtReader()
 	{
 		if (m_data != nullptr)
@@ -77,6 +75,7 @@ class BinReader : public DataReader
 {
 public:
 	BinReader(const std::string& filename) : DataReader(filename) {}
+
 	virtual ~BinReader()
 	{
 		if (m_data != nullptr)
@@ -100,8 +99,47 @@ public:
 
 	void Write() override
 	{
+		
+	}
+};
+
+class BinfReader : public DataReader
+{
+public:
+	BinfReader(const std::string& filename) : DataReader(filename) {}
+
+	virtual ~BinfReader()
+	{
+		if (m_data != nullptr)
+			delete[] m_data;
+	}
+
+	bool Open() override
+	{
+		m_in.open(m_filename, std::ios::binary);
+		if (m_in.is_open())
+		{
+			return false;
+		}
+		return true;
+	}
+
+	void Write() override
+	{
 
 	}
+
+	void Read() override
+	{
+		m_in.read((char*)&m_n, sizeof(int));
+		float* m_data = new float[m_n];
+		for (int i = 0; i < m_n; i++)
+		{
+			m_in.read(reinterpret_cast<char*>(&m_data[i]), sizeof(float));
+		}
+
+	}
+
 };
 
 DataReader* Factory(const std::string& filename)
@@ -112,6 +150,8 @@ DataReader* Factory(const std::string& filename)
 		return new TxtReader(filename);
 	else if (extension == "bin")
 		return new BinReader(filename);
+	else if (extension == "binf")
+		return new BinfReader(filename);
 	return nullptr;
 }
 
