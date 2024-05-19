@@ -124,11 +124,6 @@ public:
 		return true;
 	}
 
-	void Write() override
-	{
-
-	}
-
 	void Read() override
 	{
 		m_in.read((char*)&m_n, sizeof(int));
@@ -137,9 +132,12 @@ public:
 		{
 			m_in.read(reinterpret_cast<char*>(&m_data[i]), sizeof(float));
 		}
-
 	}
 
+	void Write() override
+	{
+
+	}
 };
 
 DataReader* Factory(const std::string& filename)
@@ -160,7 +158,7 @@ int main()
 	uint8_t n;
 	uint8_t buf[100];
 
-	DataReader* Reader = Factory("input2.bin");
+	DataReader* Reader = Factory("input1.txt");
 	if (Reader == nullptr)
 		return -1;
 	Reader->Open();
@@ -173,29 +171,5 @@ int main()
 
 	delete Reader;
 
-
-	/*std::ifstream in("input2.bin", std::ios::binary);
-	uint8_t n;
-	in.read((char*)&n, 1);
-
-	uint8_t* buf = new uint8_t[n];
-	in.read((char*)buf, n);
-
-	std::cout << (int)n << std::endl;
-
-	for (int i = 0; i < n; i++)
-		std::cout << (int)buf[i] << std::endl;
-
-	delete[] buf;*/
-
-	/*//Создание бинарного файла
-	std::ofstream out("input2.bin", std::ios::binary);
-	uint8_t buf[6];
-	buf[0] = 5;
-	for (int i = 0; i < 5; i++)
-	{
-		buf[i+1] = i+127;
-	}
-
-	out.write((char*)buf, 6);*/
+	return 0;
 }
