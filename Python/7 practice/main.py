@@ -53,6 +53,7 @@ import numpy as np
 # Ex 5
 
 
+
 # Ex 6
 
 # a = np.arange(16).reshape(4, 4)
@@ -67,6 +68,14 @@ import numpy as np
 
 # Ex 7
 
+# url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+# iris = np.genfromtxt(url, delimiter=',', dtype='object')
+#
+# vector = iris[:, 4]
+# result = np.unique(vector, return_counts=True)
+#
+# print("Unique values:", result[0])
+# print("Amount of unique values:", result[1])
 
 # Ex 8
 
