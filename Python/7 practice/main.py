@@ -1,16 +1,41 @@
 import numpy as np
 
-with open("input1.txt", "r") as file:
-    # pure_data = file.read().split()
-    # data = []
-    # for elem in pure_data:
-    #     data.append(elem.split(","))
-    # for i in range(len(data)):
-    #     for j in range(len(data[i])):
-    #         data[i][j] = int(data[i][j])
-    # matrix = np.matrix(data)
-    # print(matrix)
-    matrix = np.array([list(map(int, i.split(","))) for i in file.read().split()])
-    print("Sum of all elements: " + str(matrix.sum()))
-    print("Max value: " + str(matrix.max()))
-    print("Min value: " + str(matrix.min()))
+# Ex 1
+
+# with open("input1.txt", "r") as file:
+#     # pure_data = file.read().split()
+#     # data = []
+#     # for elem in pure_data:
+#     #     data.append(elem.split(","))
+#     # for i in range(len(data)):
+#     #     for j in range(len(data[i])):
+#     #         data[i][j] = int(data[i][j])
+#     # matrix = np.matrix(data)
+#     # print(matrix)
+#
+#     matrix = np.array([list(map(int, i.split(","))) for i in file.read().split()])
+#     print("Sum of all elements: " + str(matrix.sum()))
+#     print("Max value: " + str(matrix.max()))
+#     print("Min value: " + str(matrix.min()))
+
+# Ex 2
+
+# print("Input the X vector: ")
+# x = np.array(list(map(int, input().split(" "))))
+# result = np.unique(x, return_counts=True)
+# print(result[0])
+# print(result[1])
+
+# Ex 3
+
+# arr = np.random.normal(size=(10, 4))
+# print(arr)
+# print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+# print("Min value:                " + str(arr.min()))
+# print("Max value:                " + str(arr.max()))
+# print("Mean value:               " + str(arr.mean()))
+# print("Standard deviation value: " + str(arr.std()))
+# print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+# variable = arr[:5, :]
+
+# Ex 4
