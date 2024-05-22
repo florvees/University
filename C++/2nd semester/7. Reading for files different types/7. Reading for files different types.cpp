@@ -105,6 +105,9 @@ public:
 
 class BinfReader : public DataReader
 {
+private:
+	float* m_data;
+	unsigned int m_n;
 public:
 	BinfReader(const std::string& filename) : DataReader(filename) {}
 
@@ -126,12 +129,10 @@ public:
 
 	void Read() override
 	{
-		m_in.read((char*)&m_n, sizeof(int));
-		float* m_data = new float[m_n];
-		for (int i = 0; i < m_n; i++)
-		{
-			m_in.read(reinterpret_cast<char*>(&m_data[i]), sizeof(float));
-		}
+		m_in.read((char*)&m_n, sizeof(float));
+		std::cout << m_n << std::endl;
+		m_data = new float[m_n];
+		m_in.read((char*)m_data, m_n * sizeof(float));
 	}
 
 	void Write() override
@@ -158,7 +159,7 @@ int main()
 	uint8_t n;
 	uint8_t buf[100];
 
-	DataReader* Reader = Factory("input1.txt");
+	DataReader* Reader = Factory("input3.binf");
 	if (Reader == nullptr)
 		return -1;
 	Reader->Open();

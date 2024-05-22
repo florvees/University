@@ -52,7 +52,45 @@ import numpy as np
 
 # Ex 5
 
-
+# # Multivariate normal distribution
+#
+# import time
+# import scipy
+# from scipy.stats import multivariate_normal
+#
+# # N = int(input("Enter the value: "))
+# # D = N
+# #
+# # X = np.random.normal(size=(N, D))
+# # M = np.random.normal(size=D)
+# # C = np.cov(X)
+#
+# X = np.array([[5, 5], [1, 2]])
+# M = np.array([1, 5])
+# C = np.array([[5, 2], [2, 2]])
+#
+# start_mine = time.perf_counter()
+# value_mine = -0.5 * (np.log(2 * np.pi) + np.log(np.linalg.det(C))
+#                      + np.einsum('ij,ij->i', X - M, np.dot(np.linalg.inv(C), X - M)))
+# finish_mine = time.perf_counter()
+#
+# duration_mine = finish_mine - start_mine
+#
+# start_scipy = time.perf_counter()
+# value_scipy = scipy.stats.multivariate_normal(M, C).logpdf(X)
+# finish_scipy = time.perf_counter()
+#
+# duration_scipy = finish_scipy - start_scipy
+#
+# print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+# print(f"My value is: {value_mine}")
+# print(f"Scipy value is: {value_scipy}")
+# print(f"The difference between them: {abs(value_mine-value_scipy)}")
+# print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+# print(f"My value performed in: {duration_mine}")
+# print(f"Scipy value performed in: {duration_scipy}")
+# print(f"The difference between them: {abs(duration_mine-duration_scipy)}")
+# print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
 # Ex 6
 
@@ -81,4 +119,3 @@ import numpy as np
 
 # arr = np.array([0, 1, 2, 0, 0, 4, 0, 6, 9])
 # print("Non-zero indexes:", np.flatnonzero(arr))
-
