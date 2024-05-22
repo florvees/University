@@ -21,7 +21,7 @@ import numpy as np
 # Ex 2
 
 # print("Input the X vector: ")
-# x = np.array(list(map(int, input().split(" "))))
+# x = np.array(list(map(int, input().split())))
 # result = np.unique(x, return_counts=True)
 # print(result[0])
 # print(result[1])
@@ -39,3 +39,37 @@ import numpy as np
 # variable = arr[:5, :]
 
 # Ex 4
+
+# print("Input the X vector: ")
+# x = np.array(list(map(int, input().split())))
+# max_value = x.min()
+# for first in range(x.size-1):
+#     second = first+1
+#     if x[first] == 0:
+#         if x[second] > max_value:
+#             max_value = x[second]
+# print(max_value)
+
+# Ex 5
+
+
+# Ex 6
+
+# a = np.arange(16).reshape(4, 4)
+# print("~~~~~~~~~~~~~~~")
+# print(a)
+# print("~~~~~~~~~~~~~~~")
+# tmp = a[0, :].copy()
+# a[0, :] = a[2, :]
+# a[2, :] = tmp
+# print(a)
+# print("~~~~~~~~~~~~~~~")
+
+# Ex 7
+
+
+# Ex 8
+
+# arr = np.array([0, 1, 2, 0, 0, 4, 0, 6, 9])
+# print("Non-zero indexes:", np.flatnonzero(arr))
+
