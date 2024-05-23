@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <string>
-#include <memory>
+
 // N < 256 и a_i < 256, для всех i=1..N
 // .txt - массив данных в формате N и a_i, где i=1..N (ASCII)
 // .bin - массив данных в формате N и a_i, где i=1..N (bin)
@@ -34,7 +34,6 @@ public:
 		m_in.close();
 	}
 
-	
 	void GetData(uint8_t* buf, uint8_t& n)
 	{
 		n = m_n;
@@ -87,7 +86,7 @@ public:
 	{
 		m_out.open(filename);
 		m_out << m_n << std::endl;
-		for (uint8_t i = 0; i < m_n; i++) 
+		for (uint8_t i = 0; i < m_n; i++)
 		{
 			m_out << (int)m_data[i] << ' ';
 		}
@@ -179,7 +178,7 @@ DataReader* Factory(const std::string& filename)
 	return nullptr;
 }
 
-int main() 
+int main()
 {
 	unsigned int n;
 	float buf[100];
