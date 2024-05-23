@@ -1,16 +1,16 @@
 ﻿#include <iostream>
 #include <string>
 
-namespace df 
+namespace df
 {
-    class BigInt 
+    class BigInt
     {
     private:
         int* data;
         int data_size;
         bool is_negative;
     public:
-        BigInt() 
+        BigInt()
         {
             this->data = nullptr;
             this->data_size = 0;
@@ -25,7 +25,7 @@ namespace df
                 data = new int[data_size];
                 for (int i = 0; i < data_size; i++)
                 {
-                    data[i] = value[i+1] - '0';
+                    data[i] = value[i + 1] - '0';
                 }
             }
             else

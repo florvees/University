@@ -124,7 +124,8 @@ public:
 	{
 		m_out.open(filename, std::ios::binary);
 		m_out << m_n;
-		for (uint8_t i = 0; i < m_n; i++) {
+		for (uint8_t i = 0; i < m_n; i++) 
+		{
 			m_out << m_data[i];
 		}
 		m_out.close();
@@ -141,7 +142,8 @@ public:
 			delete[] m_dataf;
 	}
 
-	bool Open() override {
+	bool Open() override
+	{
 		m_in.open(m_filename, std::ios::binary);
 		if (!m_in.is_open())
 			return false;
@@ -158,7 +160,8 @@ public:
 	{
 		m_out.open(filename, std::ios::binary);
 		m_out.write((char*)&m_nf, sizeof(uint32_t));
-		for (uint32_t i = 0; i < m_nf; i++) {
+		for (uint32_t i = 0; i < m_nf; i++) 
+		{
 			m_out.write((char*)&m_dataf[i], sizeof(float));
 		}
 		m_out.close();

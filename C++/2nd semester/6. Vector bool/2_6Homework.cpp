@@ -13,57 +13,58 @@ namespace df
     class vector<bool>
     {
     private:
-        char* arr;
+        unsigned char* m_data;
         size_t m_byte_lenght;
         size_t m_bit_lenght;
         size_t m_current_size;
-    public:
+    public: 
         vector<bool>(size_t lenght)
         {
             m_byte_lenght = lenght / 8 + 1;
             m_bit_lenght = lenght % 8;
             m_current_size = 0;
-            arr = new char[m_byte_lenght];
+            m_data = new unsigned char[m_byte_lenght];
         }
         ~vector<bool>()
         {
-            delete[] arr;
+            delete[] m_data;
         }
         void push_back(bool boolean)
         {
-                arr[m_current_size / 8] << 1;
-                arr[m_current_size / 8] |= boolean;
-                m_current_size++;
+            m_data[m_current_size / 8] << 1;
+            m_data[m_current_size / 8] |= boolean;
+            m_current_size++;
         }
         size_t size()
         {
             return m_current_size;
         }
-        bool operator[](int index)
+        bool& operator[](size_t index)
         {
-            char tmp_a = 0b00000001;    
-            tmp_a << index % 8;
-            return (arr[index / 8] & tmp_a) >> index % 8;
+            bool value = ((1 << (index % 8)) & (m_data[index / 8])) != 0;
+            return value;
         }
     };
 }
 
 int main()  
 {
-    df::vector<bool> test(12);
-    test.push_back(true);
+    df::vector<bool> test(9);
     test.push_back(true);
     test.push_back(false);
     test.push_back(true);
-    for (int i = 0; i < 12; i++)
+    test.push_back(true);
+    test.push_back(true);
+    test.push_back(true);
+    test.push_back(true);
+    test.push_back(true);
+    for (int i = 0; i < test.size(); i++)
     {
-        if (test[i] == true)
-        {
-            std::cout << "True" << std::endl;
-        }
-        else
-        {
-            std::cout << "False" << std::endl;
-        }
+        std::cout << test[i];
+    }
+    std::cout << "\n~~~~" << std::endl;
+    for (int i = 0; i < test.size(); i++)
+    {
+        std::cout << test[i];
     }
 }
