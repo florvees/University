@@ -184,10 +184,12 @@ int main()
 	float buf[100];
 
 	DataReader* Reader = Factory("input3.binf");
-	if (Reader == nullptr) {
+	if (Reader == nullptr) 
+	{
 		std::cerr << "Unable to open the file!" << std::endl;
 		return -1;
 	}
+
 	Reader->Open();
 	Reader->Read();
 	Reader->GetData(buf, n);
