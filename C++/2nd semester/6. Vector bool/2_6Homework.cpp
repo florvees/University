@@ -12,83 +12,94 @@ template<>
 class vector<bool>
 {
 private:
-    char* data = new char[1];
-    size_t length;
+    char* m_data = new char[1];
+    size_t m_length;
 
     void pop_back()
     {
-        char* p = new char[(this->length / 8) - 1];
-        std::copy(*&this->data, (*&this->data) + (this->length / 8) - 1, p);
-        std::swap(this->data, p);
-        delete[]p;
+        char* tmp = new char[(m_length / 8) - 1];
+        std::copy(*&m_data, (*&m_data) + (m_length / 8) - 1, tmp);
+        std::swap(m_data, tmp);
+        delete[] tmp;
     }
 
-    void push_last(bool val)
+    void push_last(bool value)
     {
-        char* p = new char[(this->length / 8) + 1];
-        std::copy(*&this->data, *&(this->data) + (this->length / 8), p);
-        p[this->length] = (char)val;
-        std::swap(this->data, p);
-        delete[]p;
+        char* tmp = new char[(m_length / 8) + 1];
+        std::copy(*&m_data, *&(m_data) + (m_length / 8), tmp);
+        tmp[m_length] = (char)value;
+        std::swap(m_data, tmp);
+        delete[] tmp;
     }
 public:
-    vector<bool>() {
-        this->length = 0;
+    vector<bool>() 
+    {
+        m_length = 0;
     }
 
-    size_t size() {
-        return this->length;
+    size_t size() 
+    {
+        return m_length;
     }
 
-    void push_back(bool value) {
-        if (this->length % 8 == 0) {
+    void push_back(bool value) 
+    {
+        if (m_length % 8 == 0)
+        {
             this->push_last(false);
         }
-        if (value) {
-            this->data[this->length / 8] |= (1 << (this->length % 8));
+        if (value) 
+        {
+            m_data[m_length / 8] |= (1 << (m_length % 8));
         }
-        this->length++;
+        m_length++;
     }
 
     void at(bool val, size_t index)
     {
-        if ((index > this->length) || (index < 0))
+        if ((index > m_length) || (index < 0))
             throw std::out_of_range("Index out of range");
-        if (val) this->data[index / 8] |= (1 << (index % 8));
-        else this->data[index / 8] &= ~(1 << (index % 8));
+        if (val) m_data[index / 8] |= (1 << (index % 8));
+        else m_data[index / 8] &= ~(1 << (index % 8));
     }
 
     bool& operator[](size_t index)
     {
-        bool curr_val = ((1 << (index % 8)) & (this->data[index / 8])) != 0;
+        bool curr_val = ((1 << (index % 8)) & (m_data[index / 8])) != 0;
         return curr_val;
     }
 
-    void insert(size_t index, bool value) {
-        if (index > this->length) {
+    void insert(size_t index, bool value) 
+    {
+        if (index > m_length) 
+        {
             throw std::out_of_range("Index out of range");
         }
         push_back(false);
-        for (size_t i = this->length - 1; i > index; --i) {
+        for (size_t i = m_length - 1; i > index; --i) 
+        {
             this->at((*this)[i - 1], i);
         }
         (*this)[index] = value;
     }
 
     void erase(size_t index) {
-        if (index >= this->length) {
+        if (index >= m_length) {
             throw std::out_of_range("Index out of range");
         }
-        for (size_t i = index; i < this->length - 1; ++i) {
+        for (size_t i = index; i < m_length - 1; ++i) 
+        {
             (*this)[i] = (*this)[i + 1];
         }
-        if ((this->length - 1) % 8 == 0) {
+        if ((m_length - 1) % 8 == 0) 
+        {
             this->pop_back();
         }
-        else {
-            this->data[this->length / 8] &= ~(1 << ((this->length - 1) % 8));
+        else 
+        {
+            m_data[m_length / 8] &= ~(1 << ((m_length - 1) % 8));
         }
-        this->length--;
+        m_length--;
     }
 };
 
@@ -103,25 +114,26 @@ int main()
     std::cout << test[1] << std::endl;
     std::cout << "~~~~~~~~" << std::endl;
 
+    test.insert(0, true);
+    std::cout << ".insert(0, true) occured" << std::endl;
 
     std::cout << "~~~~~~~~" << std::endl;
-    test.insert(0, true);
     for (size_t i = 0; i < test.size(); ++i)
     {
         std::cout << test[i] << std::endl;
     }
     std::cout << "~~~~~~~~" << std::endl;
 
+    test.erase(2);
+    std::cout << ".erase(2) occured" << std::endl;
 
     std::cout << "~~~~~~~~" << std::endl;
-    test.erase(2);
     for (size_t i = 0; i < test.size(); ++i)
     {
         std::cout << test[i] << std::endl;
     }
     std::cout << "The current size of vector is: " << test.size() << std::endl;
     std::cout << "~~~~~~~~" << std::endl;
-
 
     std::cout << "~~~~~~~~" << std::endl;
     for (int i = 0; i < 8; i++)
