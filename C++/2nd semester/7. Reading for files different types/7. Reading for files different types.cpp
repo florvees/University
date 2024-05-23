@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <fstream>
-
+#include <string>
+#include <memory>
 // N < 256 и a_i < 256, для всех i=1..N
 // .txt - массив данных в формате N и a_i, где i=1..N (ASCII)
 // .bin - массив данных в формате N и a_i, где i=1..N (bin)
@@ -9,26 +10,43 @@ class DataReader
 {
 protected:
 	std::ifstream m_in;
+	std::ofstream m_out;
+
 	std::string m_filename;
+
 	uint8_t* m_data;
 	uint8_t m_n;
+
+	uint32_t m_nf;
+	float* m_dataf;
 public:
-	DataReader(const std::string& filename) : m_filename(filename), m_n(0), m_data(nullptr) {}
+	DataReader(const std::string& filename) :
+		m_filename(filename), m_n(0), m_data(nullptr), m_nf(0), m_dataf(nullptr) {}
+
 	virtual ~DataReader() {}
+
 	virtual bool Open() = 0;
 	virtual void Read() = 0;
-	virtual void Write() = 0;
+	virtual void Write(std::string filename) = 0;
 
 	void Close()
 	{
 		m_in.close();
 	}
 
+	
 	void GetData(uint8_t* buf, uint8_t& n)
 	{
 		n = m_n;
 		for (int i = 0; i < m_n; i++)
 			buf[i] = m_data[i];
+	}
+
+	void GetData(float* buf, uint32_t& n)
+	{
+		n = m_nf;
+		for (uint32_t i = 0; i < m_nf; i++)
+			buf[i] = m_dataf[i];
 	}
 };
 
@@ -65,9 +83,15 @@ public:
 		}
 	}
 
-	void Write() override
+	void Write(std::string filename) override
 	{
-
+		m_out.open(filename);
+		m_out << m_n << std::endl;
+		for (uint8_t i = 0; i < m_n; i++) 
+		{
+			m_out << (int)m_data[i] << ' ';
+		}
+		m_out.close();
 	}
 };
 
@@ -97,47 +121,48 @@ public:
 		m_in.read((char*)m_data, m_n);
 	}
 
-	void Write() override
+	void Write(std::string filename) override
 	{
-		
+		m_out.open(filename, std::ios::binary);
+		m_out << m_n;
+		for (uint8_t i = 0; i < m_n; i++) {
+			m_out << m_data[i];
+		}
+		m_out.close();
 	}
 };
 
-class BinfReader : public DataReader
-{
-private:
-	float* m_data;
-	unsigned int m_n;
+class BinfReader : public DataReader {
 public:
 	BinfReader(const std::string& filename) : DataReader(filename) {}
 
 	virtual ~BinfReader()
 	{
 		if (m_data != nullptr)
-			delete[] m_data;
+			delete[] m_dataf;
 	}
 
-	bool Open() override
-	{
+	bool Open() override {
 		m_in.open(m_filename, std::ios::binary);
-		if (m_in.is_open())
-		{
+		if (!m_in.is_open())
 			return false;
-		}
 		return true;
 	}
 
-	void Read() override
-	{
-		m_in.read((char*)&m_n, sizeof(float));
-		std::cout << m_n << std::endl;
-		m_data = new float[m_n];
-		m_in.read((char*)m_data, m_n * sizeof(float));
+	void Read() override {
+		m_in.read((char*)&m_nf, sizeof(uint32_t));
+		m_dataf = new float[m_nf];
+		m_in.read((char*)m_dataf, m_nf * sizeof(float));
 	}
 
-	void Write() override
+	void Write(std::string filename) override
 	{
-
+		m_out.open(filename, std::ios::binary);
+		m_out.write((char*)&m_nf, sizeof(uint32_t));
+		for (uint32_t i = 0; i < m_nf; i++) {
+			m_out.write((char*)&m_dataf[i], sizeof(float));
+		}
+		m_out.close();
 	}
 };
 
@@ -154,17 +179,20 @@ DataReader* Factory(const std::string& filename)
 	return nullptr;
 }
 
-int main()
+int main() 
 {
-	uint8_t n;
-	uint8_t buf[100];
+	unsigned int n;
+	float buf[100];
 
 	DataReader* Reader = Factory("input3.binf");
-	if (Reader == nullptr)
+	if (Reader == nullptr) {
+		std::cerr << "Unable to open the file!" << std::endl;
 		return -1;
+	}
 	Reader->Open();
 	Reader->Read();
 	Reader->GetData(buf, n);
+	Reader->Write("output3.binf");
 
 	std::cout << (int)n << std::endl;
 	for (int i = 0; i < n; i++)
