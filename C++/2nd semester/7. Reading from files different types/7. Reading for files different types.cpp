@@ -5,26 +5,34 @@
 // N < 256 и a_i < 256, для всех i=1..N
 // .txt - массив данных в формате N и a_i, где i=1..N (ASCII)
 // .bin - массив данных в формате N и a_i, где i=1..N (bin)
+// .binf - массив данных в формате N и a_i, где i=1..N (binf)
 
 class DataReader
 {
 protected:
+	std::string m_filename;
+
 	std::ifstream m_in;
 	std::ofstream m_out;
-
-	std::string m_filename;
 
 	uint8_t* m_data;
 	uint8_t m_n;
 
-	uint32_t m_nf;
-	float* m_dataf;
+	float* m_dataf; // needed for BinfReader only
+	uint32_t m_nf; // needed for BinfReader only
 public:
-	DataReader(const std::string& filename) :
-		m_filename(filename), m_n(0), m_data(nullptr), m_nf(0), m_dataf(nullptr) {}
+	DataReader(const std::string& filename)
+	{
+		m_filename = filename;
+
+		m_data = nullptr;
+		m_n = 0;
+
+		m_dataf = nullptr;
+		m_nf = 0;
+	}
 
 	virtual ~DataReader() {}
-
 	virtual bool Open() = 0;
 	virtual void Read() = 0;
 	virtual void Write(std::string filename) = 0;
@@ -41,7 +49,7 @@ public:
 			buf[i] = m_data[i];
 	}
 
-	void GetData(float* buf, uint32_t& n)
+	void GetData(float* buf, uint32_t& n) // needed for BinfReader only
 	{
 		n = m_nf;
 		for (uint32_t i = 0; i < m_nf; i++)
@@ -150,7 +158,8 @@ public:
 		return true;
 	}
 
-	void Read() override {
+	void Read() override 
+	{
 		m_in.read((char*)&m_nf, sizeof(uint32_t));
 		m_dataf = new float[m_nf];
 		m_in.read((char*)m_dataf, m_nf * sizeof(float));
@@ -183,10 +192,14 @@ DataReader* Factory(const std::string& filename)
 
 int main()
 {
-	unsigned int n;
+	uint32_t n;
 	float buf[100];
 
+	/*uint8_t n;
+	uint8_t buf[100];*/
+
 	DataReader* Reader = Factory("input3.binf");
+
 	if (Reader == nullptr) 
 	{
 		std::cerr << "Unable to open the file!" << std::endl;

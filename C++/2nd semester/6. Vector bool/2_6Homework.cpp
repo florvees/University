@@ -14,23 +14,6 @@ class vector<bool>
 private:
     char* m_data = new char[1];
     size_t m_length;
-
-    void pop_back()
-    {
-        char* tmp = new char[(m_length / 8) - 1];
-        std::copy(*&m_data, (*&m_data) + (m_length / 8) - 1, tmp);
-        std::swap(m_data, tmp);
-        delete[] tmp;
-    }
-
-    void push_last(bool value)
-    {
-        char* tmp = new char[(m_length / 8) + 1];
-        std::copy(*&m_data, *&(m_data) + (m_length / 8), tmp);
-        tmp[m_length] = (char)value;
-        std::swap(m_data, tmp);
-        delete[] tmp;
-    }
 public:
     vector<bool>() 
     {
@@ -46,7 +29,11 @@ public:
     {
         if (m_length % 8 == 0)
         {
-            this->push_last(false);
+            char* tmp = new char[(m_length / 8) + 1];
+            std::copy(*&m_data, *&(m_data) + (m_length / 8), tmp);
+            tmp[m_length] = (char)value;
+            std::swap(m_data, tmp);
+            delete[] tmp;
         }
         if (value) 
         {
@@ -78,7 +65,7 @@ public:
         push_back(false);
         for (size_t i = m_length - 1; i > index; --i) 
         {
-            this->at((*this)[i - 1], i);
+            at((*this)[i - 1], i);
         }
         (*this)[index] = value;
     }
@@ -93,7 +80,10 @@ public:
         }
         if ((m_length - 1) % 8 == 0) 
         {
-            this->pop_back();
+            char* tmp = new char[(m_length / 8) - 1];
+            std::copy(*&m_data, (*&m_data) + (m_length / 8) - 1, tmp);
+            std::swap(m_data, tmp);
+            delete[] tmp;
         }
         else 
         {
@@ -115,7 +105,7 @@ int main()
     std::cout << "~~~~~~~~" << std::endl;
 
     test.insert(0, true);
-    std::cout << ".insert(0, true) occured" << std::endl;
+    std::cout << ".insert(0, true)" << std::endl;
 
     std::cout << "~~~~~~~~" << std::endl;
     for (size_t i = 0; i < test.size(); ++i)
@@ -125,7 +115,7 @@ int main()
     std::cout << "~~~~~~~~" << std::endl;
 
     test.erase(2);
-    std::cout << ".erase(2) occured" << std::endl;
+    std::cout << ".erase(2)" << std::endl;
 
     std::cout << "~~~~~~~~" << std::endl;
     for (size_t i = 0; i < test.size(); ++i)
