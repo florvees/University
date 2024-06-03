@@ -12,24 +12,24 @@ def show(reading_mode, lines_amount, file_data):
         reading_mode = 'top'
         print('Not enough lines')
 
-    lines_lenghts = []
+    lines_lenght = list()
     for i in range(0, len(file_data[0])):
-        one_line = []
+        one_line = list()
         for j in range(0, lines_amount):
             one_line.append(len(str(file_data[j][i])))
-        lines_lenghts.append(one_line)
+        lines_lenght.append(one_line)
 
     if reading_mode == 'top' or reading_mode == '':
         for i in range(0, lines_amount + 1):
             for j in range(0, len(file_data[0])):
-                print(str(file_data[i][j]).center(max(lines_lenghts[j])), end=' ')
+                print(str(file_data[i][j]).center(max(lines_lenght[j])), end=' ')
             print("\n")
 
     if reading_mode == 'bottom':
         file_data.append(file_data[0])
         for i in reversed(range(len(file_data) - lines_amount - 1, len(file_data))):
             for j in range(0, len(file_data[0])):
-                print(str(file_data[i][j]).center(max(lines_lenghts[j])), end=' ')
+                print(str(file_data[i][j]).center(max(lines_lenght[j])), end=' ')
             print("\n")
 
     if reading_mode == 'random':
@@ -37,7 +37,7 @@ def show(reading_mode, lines_amount, file_data):
         rrdata.insert(0, file_data[0])
         for i in range(0, lines_amount + 1):
             for j in range(0, len(file_data[0])):
-                print(str(rrdata[i][j]).center(max(lines_lenghts[j])), end=' ')
+                print(str(rrdata[i][j]).center(max(lines_lenght[j])), end=' ')
             print("\n")
 
 
@@ -71,7 +71,7 @@ def info(input_file):
 
 
 def del_nan(file_data):
-    cleaned_list = []
+    cleaned_list = list()
     for i in range(0, len(file_data)):
         if '' not in file_data[i]:
             cleaned_list.append(file_data[i])
