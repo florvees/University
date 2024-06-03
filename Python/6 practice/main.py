@@ -3,13 +3,13 @@ from random import sample
 from os import makedirs
 
 
-def show(mode, lines_amount, file_data):
+def show(reading_mode, lines_amount, file_data):
     if lines_amount == '':
         lines_amount = 5
-    lines_amount = int(lines_amount)
 
+    lines_amount = int(lines_amount)
     if len(file_data) - 1 < 5:
-        mode = 'top'
+        reading_mode = 'top'
         print('Not enough lines')
 
     lines_lenghts = []
@@ -19,20 +19,20 @@ def show(mode, lines_amount, file_data):
             one_line.append(len(str(file_data[j][i])))
         lines_lenghts.append(one_line)
 
-    if mode == 'top' or mode == '':
+    if reading_mode == 'top' or reading_mode == '':
         for i in range(0, lines_amount + 1):
             for j in range(0, len(file_data[0])):
                 print(str(file_data[i][j]).center(max(lines_lenghts[j])), end=' ')
             print("\n")
 
-    if mode == 'bottom':
+    if reading_mode == 'bottom':
         file_data.append(file_data[0])
         for i in reversed(range(len(file_data) - lines_amount - 1, len(file_data))):
             for j in range(0, len(file_data[0])):
                 print(str(file_data[i][j]).center(max(lines_lenghts[j])), end=' ')
             print("\n")
 
-    if mode == 'random':
+    if reading_mode == 'random':
         rrdata = sample(file_data[1:], lines_amount)
         rrdata.insert(0, file_data[0])
         for i in range(0, lines_amount + 1):
@@ -97,6 +97,8 @@ def make_ds(file_data):
 
 with open("Titanic.csv", "r") as file:
     data = list(csv.reader(file, delimiter=','))
-    show('bottom', 8, data)
+    show('bottom', 10, data)
     info(data)
+    # before using the function below, make sure that workdata directory does not exist
+    # make_ds(data)
 
