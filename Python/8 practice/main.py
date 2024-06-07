@@ -89,17 +89,17 @@ frequency_2 = Slider(ax_frequency_2, 'frequency', valmin=0, valmax=10)
 line3, = ax[2].plot(x1 + x2, y1 + y2)
 
 
-def update(value):
+def update(val):
     n_frequency_1 = frequency_1.val
     n_amplitude_1 = amplitude_1.val
-    line1.set_ydata(n_amplitude_1*np.sin(n_frequency_1 * x1))
+    line1.set_ydata(n_amplitude_1 * np.sin(n_frequency_1 * x1))
 
     n_frequency_2 = frequency_2.val
     n_amplitude_2 = amplitude_2.val
-    line2.set_ydata(n_amplitude_2*np.sin(n_frequency_2 * x2))
+    line2.set_ydata(n_amplitude_2 * np.sin(n_frequency_2 * x2))
 
-    line3.set_ydata(n_amplitude_1*np.sin(n_frequency_1 * x1) +
-                    n_amplitude_2*np.sin(n_frequency_2 * x2))
+    line3.set_ydata(n_amplitude_1 * np.sin(n_frequency_1 * x1) +
+                    n_amplitude_2 * np.sin(n_frequency_2 * x2))
 
 
 frequency_1.on_changed(update)
