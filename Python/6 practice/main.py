@@ -41,7 +41,7 @@ def show(reading_mode, lines_amount, file_data):
             print("\n")
 
 
-def type_define(input_data):
+def type_definer(input_data):
     try:
         int(input_data)
         return 'int'
@@ -61,12 +61,12 @@ def info(input_file):
         data_amount = 0
         data_type = ''
         for j in range(len(input_file) - 1):
-            if type_define(input_file[j][i]) == 'float':
+            if type_definer(input_file[j][i]) == 'float':
                 data_type = 'float'
             if input_file[j][i] != '':
                 data_amount += 1
         if data_type != 'float':
-            data_type = type_define(input_file[j][i])
+            data_type = type_definer(input_file[j][i])
             print(input_file[0][i], data_amount, data_type)
 
 
