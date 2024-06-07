@@ -45,7 +45,7 @@
 #
 # figure, ax = plt.subplots()
 #
-# parameter = np.linspace(-5, 5, 100)
+# parameter = np.linspace(1, 10, 1000)
 # line, = ax.plot(np.sin(parameter), np.sin(parameter))
 #
 # def animate(i):
@@ -59,7 +59,56 @@
 
 # Ex 4
 
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.widgets import Slider
 
+amplitude_1 = 1
+frequency_1 = 1
+
+fig, ax = plt.subplots(3, 1)
+
+x1 = np.linspace(-10, 10, 500)
+y1 = amplitude_1 * np.sin(frequency_1 * x1)
+line1, = ax[0].plot(x1, y1)
+
+ax_amplitude_1 = plt.axes((0.3, 0.9, 0.1, 0.1))
+ax_frequency_1 = plt.axes((0.1, 0.9, 0.1, 0.1))
+amplitude_1 = Slider(ax_amplitude_1, 'amplitude', valmin=0, valmax=10)
+frequency_1 = Slider(ax_frequency_1, 'frequency', valmin=0, valmax=10)
+
+x2 = np.linspace(-10, 10, 500)
+y2 = np.cos(x2)
+line2, = ax[1].plot(x2, y2)
+
+ax_amplitude_2 = plt.axes((0.8, 0.9, 0.1, 0.1))
+ax_frequency_2 = plt.axes((0.6, 0.9, 0.1, 0.1))
+amplitude_2 = Slider(ax_amplitude_2, 'amplitude', valmin=0, valmax=10)
+frequency_2 = Slider(ax_frequency_2, 'frequency', valmin=0, valmax=10)
+
+line3, = ax[2].plot(x1 + x2, y1 + y2)
+
+
+def update(value):
+    n_frequency_1 = frequency_1.val
+    n_amplitude_1 = amplitude_1.val
+    line1.set_ydata(n_amplitude_1*np.sin(n_frequency_1 * x1))
+
+    n_frequency_2 = frequency_2.val
+    n_amplitude_2 = amplitude_2.val
+    line2.set_ydata(n_amplitude_2*np.sin(n_frequency_2 * x2))
+
+    line3.set_ydata(n_amplitude_1*np.sin(n_frequency_1 * x1) +
+                    n_amplitude_2*np.sin(n_frequency_2 * x2))
+
+
+frequency_1.on_changed(update)
+amplitude_1.on_changed(update)
+
+frequency_2.on_changed(update)
+amplitude_2.on_changed(update)
+
+plt.show()
 
 # Ex 5
 
