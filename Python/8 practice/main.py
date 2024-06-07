@@ -4,7 +4,7 @@
 # import scipy.special as sp
 # import matplotlib.pyplot as plt
 #
-# x = np.linspace(-1, 1, 400)
+# x = np.linspace(-1, 1, 100)
 # plt.figure()
 #
 # for n in range(1, 8):
@@ -20,7 +20,7 @@
 # import numpy as np
 # import matplotlib.pyplot as plt
 #
-# parameter = np.linspace(0, 2 * np.pi, 1000)
+# parameter = np.linspace(1, 10, 1000)
 # ratios = [(3, 2), (3, 4), (5, 4), (5, 6)]
 # plt.figure(figsize=(10, 10))
 #
@@ -58,3 +58,28 @@
 # plt.show()
 
 # Ex 4
+
+
+
+# Ex 5
+
+# import numpy as np
+# import matplotlib.pyplot as plt
+#
+# x = np.random.rand(1000)
+# y = np.random.rand(1000)
+# z = np.random.rand(1000)
+#
+# MSE = pow((x - y), 2)
+#
+# figure = plt.figure()
+#
+# ax1 = figure.add_subplot(121, projection='3d')
+# ax2 = figure.add_subplot(122, projection='3d')
+#
+# ax1.scatter(x, y, z)
+# ax2.scatter(x, y, MSE)
+#
+# ax2.set_yscale('log')
+#
+# plt.show()
