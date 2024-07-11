@@ -4,7 +4,7 @@ import random
 import time
 
 question = "0"
-API_TOKEN = '6870856711:AAFzbi7CVl40MIcCl8weF_P8jPvW3BU5xo4'
+API_TOKEN = '-'
 
 bot = telebot.TeleBot(API_TOKEN)
 
