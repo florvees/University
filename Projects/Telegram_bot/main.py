@@ -4,24 +4,27 @@ import random
 import time
 
 question = "0"
-API_TOKEN = '6870856711:AAFzbi7CVl40MIcCl8weF_P8jPvW3BU5xo4'
+API_TOKEN = '-'
 
 bot = telebot.TeleBot(API_TOKEN)
 
+
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.send_message(message.chat.id, 'Привет! Я - <b>водила-бот</b>, и я знаю, как правильно вести себя на дорогах! Хочешь так же? '
-                          'Тогда напиши команду /begin и приступай к изучению правил дорожного движения! Вопросы будут'
-                          'появляться каждые 30 минут!', parse_mode='html')
+    bot.send_message(message.chat.id,
+                     'Привет! Я - <b>водила-бот</b>, и я знаю, как правильно вести себя на дорогах! Хочешь так же? '
+                     'Тогда напиши команду /begin и приступай к изучению правил дорожного движения! Вопросы будут'
+                     'появляться каждые 30 минут!', parse_mode='html')
+
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
     bot.send_message(message.chat.id, 'Команды:\n'
-                          '/start - начать работу с ботом\n'
-                          '/begin - начать рассылку\n'
-                          '/info [number] - пояснение к вопросу\n'
-                          '/timer [minutes] - установить время между постами (в разработке)\n'
-                          '/stats - увидеть профиль и достижения (в разработке)\n')
+                                      '/start - начать работу с ботом\n'
+                                      '/begin - начать рассылку\n'
+                                      '/info [number] - пояснение к вопросу\n'
+                                      '/timer [minutes] - установить время между постами (в разработке)\n'
+                                      '/stats - увидеть профиль и достижения (в разработке)\n')
 
 
 @bot.message_handler(commands=['begin'])
@@ -42,9 +45,10 @@ def send_question(message):
         text = (question_number + '. ' + data[question_number][0] + '\n1. ' + data[question_number][1] + '\n2. '
                 + data[question_number][2] + '\n3. ' + data[question_number][3])
         bot.send_photo(message.chat.id, photo, caption=text, parse_mode='HTML', reply_markup=markup)
-        bot.send_message(message.chat.id, f'Правильный ответ: ||{data[question_number][4]}||',  parse_mode='MarkdownV2')
+        bot.send_message(message.chat.id, f'Правильный ответ: ||{data[question_number][4]}||', parse_mode='MarkdownV2')
 
         time.sleep(1800)
+
 
 # @bot.message_handler(commands=['timer'])
 # def set_timer(message):
@@ -60,6 +64,7 @@ def send_info(message):
         data = json.load(file)
         number = message.text.split()[1]
         bot.send_message(message.chat.id, data[number][6])
+
 
 @bot.message_handler()
 def confusing_reply(message):
