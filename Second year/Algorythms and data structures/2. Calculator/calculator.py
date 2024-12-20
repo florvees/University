@@ -1,5 +1,5 @@
 #Using cide from previous lab we can check if user input is correct in sense of correct brackets:
-from Lab1.lab_1 import check_brackets
+from bracket_problem import check_brackets
 from queue import LifoQueue, Queue
 PRIORITY = {
    "start": 0,

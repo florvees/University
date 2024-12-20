@@ -10,3 +10,6 @@ def shell_sort(arr: list) -> list:
                 dif = j - step
         step //= 2
     return arr
+
+arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+print(shell_sort(arr))
