@@ -1,87 +1,103 @@
-from __future__ import annotations
 from abc import ABC, abstractmethod
-
-
+from typing import Self
+from output_state import OutputState
 
 class Command(ABC):
     @abstractmethod
     def execute(self) -> None:
-        ...
+        pass
     @abstractmethod
     def undo(self) -> None:
-        ...
+        pass
     @abstractmethod
     def redo(self) -> None:
-        ...
-
+        pass
 
 
 class PrintCharCommand(Command):
-    text = ""  # Хранение всего текста
-
-    def __init__(self, char: str) -> None:
+    def __init__(self, char: str, output: OutputState) -> None:
+        self.output = output
         self.char = char
-        
+
     def execute(self) -> str:
-        PrintCharCommand.text += self.char
-        return PrintCharCommand.text
-        
+        self.output.add_char(self.char)
+        return f"{self.char}"
+
     def undo(self) -> str:
-        PrintCharCommand.text = PrintCharCommand.text[:-1]
-        return PrintCharCommand.text
-        
+        self.output.remove_char()
+        return f"removed '{self.char}'"
+
     def redo(self) -> str:
         return self.execute()
-    
-    
+
 
 class VolumeUpCommand(Command):
-    def __init__(self, amount: int = 20, current_volume: int = 50) -> None:
+    def __init__(self, output: OutputState, amount:  int = 20) -> None:
+        self.output = output
         self.amount = amount
-        self.current_volume = current_volume 
-        
+
     def execute(self) -> str:
-        self.current_volume += self.amount
-        return f"volume increased +{self.amount}% (now: {self.current_volume}%)"
-        
+        self.output.volume += self.amount
+        return f"volume increased +{self.amount}%"
+
     def undo(self) -> str:
-        self.current_volume -= self.amount
-        return f"volume decreased +{self.amount}% (now: {self.current_volume}%)"
-        
+        self.output.volume -= self.amount
+        return f"volume decreased +{self.amount}%"
+
     def redo(self) -> str:
         return self.execute()
 
+    @classmethod
+    def from_dict(cls, data: dict, output: OutputState) -> Self:
+        return cls({
+            "output": output,
+            "amount": data["amount"]
+        })
 
 
 class VolumeDownCommand(Command):
-    def __init__(self, amount: int = 20, current_volume: int = 50) -> None:
+    def __init__(self, output: OutputState, amount:  int = 20) -> None:
+        self.output = output
         self.amount = amount
-        self.current_volume = current_volume  
-        
+
     def execute(self) -> str:
-        self.current_volume -= self.amount
-        return f"volume decreased -{self.amount}% (now: {self.current_volume}%)"
-        
+        self.output.volume -= self.amount
+        return f"volume decreased -{self.amount}%"
+
     def undo(self) -> str:
-        self.current_volume += self.amount
-        return f"volume increased -{self.amount}% (now: {self.current_volume}%)"
-        
+        self.output.volume += self.amount
+        return f"volume increased -{self.amount}%"
+
     def redo(self) -> str:
         return self.execute()
 
-
+    @classmethod
+    def from_dict(cls, data: dict, output: OutputState) -> Self:
+        return cls({
+            "output": output,
+            "amount": data["amount"]
+        })
 
 class MediaPlayerCommand(Command):
-    def __init__(self, is_playing: bool = False) -> None:
-        self.is_playing = is_playing
-        
+    def __init__(self, output: OutputState, was_playing: bool = False) -> None:
+        self.output = output
+        self.was_playing = was_playing
+
     def execute(self) -> str:
-        self.is_playing = True
+        self.was_playing = self.output.media_playing
+        self.output.media_playing = True
         return "media player launched"
-        
+
     def undo(self) -> str:
-        self.is_playing = False
+        self.output.media_playing = self.was_playing
         return "media player closed"
-        
+
     def redo(self) -> str:
         return self.execute()
+
+    @classmethod
+    def from_dict(cls, data: dict, output: OutputState) -> Self:
+        return cls({
+            "output": output,
+            "was_playing": data["was_playing"]
+        })

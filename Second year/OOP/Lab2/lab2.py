@@ -17,7 +17,6 @@ class Color(Enum):
     WHITE = 37
 
 
-    
 class Printer:
     _font: dict[str, list[str]] = {}
     _char_width: int = 5
@@ -40,7 +39,7 @@ class Printer:
                 cls._char_width = file.readline().count('_')
                 cls._font[' '] = [' '*cls._char_width for _ in range(cls._char_height)]
                 while True:
-                    char = file.readline().replace('-', '').strip()
+                    char = file.readline().replace('-', '').strip() #удаляем не нужное
                     if char == '':
                         break
                     cls._font[char] = []
@@ -52,28 +51,41 @@ class Printer:
         except Exception as e:
             print(f"Error loading font file: {e}")
             raise FileNotFoundError
-        
 
     @classmethod
-    def print_(cls, text: str, color: Color, position: tuple[int, int], symbol: str, background_color: Color = Color.BLACK) -> None:
+    def print_(cls, text: str, color: Color, position: tuple[int, int], symbol: str,
+               background_color: Color = Color.BLACK) -> None:
         if not cls._font:
             cls.load_font()
-        
+
         x, y = position
-        for char in text:
+
+        output_lines = []
+        for _ in range(cls._char_height):
+            output_lines.append("")
+
+        for char in text.upper():
             if char not in cls._font:
                 raise ValueError(f"Character {char} is not in the font file")
-            
-            for line_num, line in enumerate(cls._font[char]):
-                rendered = line.replace("*", symbol)
-                print(PLACING.format(y + line_num + 1, x + 1, COLORING.format(color.value, background_color.value + 10, rendered)), end="")
-            
-            x += cls._char_width
+
+
+            for line_num in range(cls._char_height):
+                if line_num < len(cls._font[char]):
+                    rendered = cls._font[char][line_num].replace("*", symbol)
+                    output_lines[line_num] += rendered + " "
+                else:
+                    output_lines[line_num] += " " * (cls._char_width + 1)
+
+
+        for line_num, line in enumerate(output_lines):
+            print(PLACING.format(y + line_num + 1, x + 1,
+                                 COLORING.format(color.value, background_color.value + 10, line.rstrip())),
+                  end="\n")
+
         print()
 
-
     def __enter__(self) -> Self:
-        print(COLORING.format(self.color.value, self.background_color.value + 10, ''), end="") 
+        print(COLORING.format(self.color.value, self.background_color.value + 10, ''), end="")
         return self
 
 
@@ -81,30 +93,41 @@ class Printer:
         print(COLORING.format(Color.TRANSPARENT.value, Color.TRANSPARENT.value + 10, ''), end="")
 
 
+
     def print(self, text: str) -> None:
         if not self._font:
             self.load_font()
-        x, y = self.current_x, self.current_y
-        for char in text:
+
+        output_lines = []
+        for _ in range(self._char_height):
+            output_lines.append("")
+
+        x_offset = 0
+        for char in text.upper():
             if char not in self._font:
                 continue
-            
-            for line_num, line in enumerate(self._font[char]):
-                rendered = line.replace("*", self.symbol)
-                # print(f"\033[{y + line_num + 1};{x + 1}H{rendered}", end="")
-                print(PLACING.format(y + line_num + 1, x + 1, rendered), end="")
-            
-            x += self._char_width
-        self.current_x = x
 
+            for line_num in range(self._char_height):
+                if line_num < len(self._font[char]):
+                    rendered = self._font[char][line_num].replace("*", self.symbol)
+                    output_lines[line_num] += rendered + " "
+                else:
+                    output_lines[line_num] += " " * self._char_width
+
+            x_offset += self._char_width
+
+        for line in output_lines:
+            print(line)
+
+        self.current_x += x_offset
 
 
 if __name__ == "__main__":
     for _ in range(30):
         print()
-    Printer.load_font(filename="Labs/Lab2/font5.txt")
-    Printer.print_("AB", Color.RED, (5, 2), "#", background_color=Color.TRANSPARENT)
-    Printer.load_font(filename="Labs/Lab2/font7.txt")
+    Printer.load_font(filename="font5.txt")
+    Printer.print_("MEOW MEOW MEOW", Color.RED, (5, 2), "#", background_color=Color.TRANSPARENT)
+    Printer.load_font(filename="font7.txt")
     with Printer(Color.GREEN, (0, 10), "@", background_color=Color.BLACK) as printer:
-        printer.print("OOP LABS ARE COOL")
-        printer.print(" AB")
+        printer.print("I love")
+        printer.print('IKBFU')

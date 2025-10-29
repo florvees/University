@@ -7,7 +7,7 @@ from datetime import datetime
 
 class LogFilterProtocol(Protocol):
     def match(self, message: str) -> bool:
-        ...
+        pass
 
 
 class SimpleLogFilter(LogFilterProtocol):
@@ -26,11 +26,9 @@ class ReLogFilter(LogFilterProtocol):
         return bool(self.regex.search(message))
 
 
-
-
 class LogHandlerProtocol(Protocol):
     def handle(self, message: str) -> None:
-        ...
+        pass
 
 
 class FileHandler(LogHandlerProtocol):
@@ -64,35 +62,27 @@ class ConsoleHandler(LogHandlerProtocol):
         print(f'{datetime.now().isoformat()}: \t {message}')
 
 
-class SysLogHandler(LogHandlerProtocol):
-    # I guess, I don't need to write a class for SysLogHandler while on Windows?..
-    pass
-
-    
-
 class Logger:
     def __init__(self, handlers: list[LogHandlerProtocol], filters: list[LogFilterProtocol]) -> None:
         self.handlers = handlers
         self.filters = filters
 
     def write(self, message: str) -> None:
-        if any(filter_cls.match(message) for filter_cls in self.filters):
+        if all(filter_cls.match(message) for filter_cls in self.filters):
             for handler in self.handlers:
                 handler.handle(message)
 
 
-                
-
 if __name__ == '__main__':
     handlers = [
         ConsoleHandler(),
-        FileHandler('Labs/Lab3/log.log'),
+        FileHandler('log.log'),
         SocketHandler('localhost', 5140),
     ]
 
     filters = [
-        SimpleLogFilter('IMPORTANT'),
-        SimpleLogFilter('INFO'),
+        SimpleLogFilter('404'),
+        SimpleLogFilter('ERROR'),
         ReLogFilter(r'(ERROR|WARNING) \d+')
     ]
 

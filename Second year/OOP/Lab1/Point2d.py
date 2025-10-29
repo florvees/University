@@ -2,6 +2,8 @@ from typing import Self
 
 WIDTH, HEIGHT = 1024, 750
 
+#TODO Try using slots
+#TODO Try using pydantic
 
 class Point2d:
     x: float

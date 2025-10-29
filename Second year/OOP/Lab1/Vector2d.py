@@ -11,7 +11,7 @@ class Vector2d:
         self.y = y
 
     @classmethod
-    def frompoints(cls, p1: Point2d, p2: Point2d) -> Self:
+    def frompoints(cls, p1: Point2d, p2: Point2d) -> Self: #Or can be written "Vector2d"
         return cls(p2.x - p1.x, p2.y - p1.y)
 
     @property
@@ -30,7 +30,7 @@ class Vector2d:
     def y(self, y: float) -> None:
         self._y = y
 
-    def __getitem__(self, index) -> float:
+    def __getitem__(self, index) -> float: # Check slots
         match index:
             case 0:
                 return self.x
@@ -65,7 +65,7 @@ class Vector2d:
         return str(self)
 
     def __abs__(self) -> float:
-        return math.sqrt((self.x * self.x) + (self.y * self.y))
+        return math.sqrt((self.x * self.x) + (self.y * self.y)) # A bit faster, than ((self.x ** 2) + (self.y ** 2)) ** 0.5, so if you need to optimize - than use that
 
     def __add__(self, value: Self) -> Self:
         return Vector2d(self.x + value.x, self.y + value.y)
@@ -79,13 +79,13 @@ class Vector2d:
     def __rmul__(self, value: float) -> Self:
         return Vector2d(self.x * value, self.y * value)
 
-    def __truediv__(self, value: float) -> Self:
+    def __truediv__(self, value: float) -> Self: #! Does it need to be floategers or float everywhere?
         return Vector2d(self.x // value, self.y // value) 
     
     def dot(self, other: Self) -> float:
         return self.x * other.x + self.y * other.y
     
-    @staticmethod
+    @staticmethod   # Can be done better with classmethod
     def dot_product(vector1: Self, vector2: Self) -> float:
         return vector1.x * vector2.x + vector1.y * vector2.y
     

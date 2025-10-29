@@ -2,7 +2,7 @@ import socket
 from typing import NoReturn
 
 def run_tcp_server() -> NoReturn:
-    HOST = 'localhost'  # Слушаем все интерфейсы: '' 
+    HOST = 'localhost'
     PORT = 5140
     
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

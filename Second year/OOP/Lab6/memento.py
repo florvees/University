@@ -1,27 +1,21 @@
 from typing import Self
-from commands import PrintCharCommand
 
 class KeyboardMemento:
     def __init__(self, state: dict) -> None:
         self.state = state
-        
+
     @classmethod
     def from_keyboard(cls, keyboard) -> Self:
-        text = PrintCharCommand.text
-
         key_bindings = {}
-        for key, command in keyboard.key_bindings.items():
+        for bind, command in keyboard.key_bindings.items():
             if command is None:
-                key_bindings[key] = None
+                key_bindings[bind] = [None, None]
             else:
-                key_bindings[key] = {
-                    'class': str(command.__class__.__name__),
-                    'state': command.__dict__.copy()
-                    }
+                command_dict = command.__dict__
+                command_dict.pop("output")
+                key_bindings[bind] = [str(command.__class__.__name__), command_dict]
 
         return cls({
-            'text': text,
-            'key_bindings': key_bindings,
-            'history': [command["key"] for command in keyboard.history],
-            'undo_stack': [command["key"] for command in keyboard.undo_stack]
-            })
+            "key_bindings": key_bindings,
+            "output_state": keyboard.output.get_state()
+        })
