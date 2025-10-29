@@ -5,40 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cba8421-821d-4fdb-914f-5045fb42934f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ElVFvNxYipI.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab1/Point2d.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Point2d.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab1/Vector2d.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Vector2d.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab1/task.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab2/font5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Lab2/font5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab2/font7.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Lab2/font7.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab2/json_to_txt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab2/lab2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab2/lab2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab2/lab2_simple.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab2/task.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab3/Lab3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab3/Lab3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab3/log.log" beforeDir="false" afterPath="$PROJECT_DIR$/Lab3/log.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab3/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab3/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab3/socket_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab3/socket_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab3/task.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab4/protocols.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab4/protocols.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab4/task.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab5/auth_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab5/auth_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab5/data/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/Lab5/data/users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab5/task.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab5/user_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab5/user_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab6/Lab6.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab6/Lab6.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab6/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab6/commands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab6/data/keyboard_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Lab6/data/keyboard_log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab6/data/keyboard_state.json" beforeDir="false" afterPath="$PROJECT_DIR$/Lab6/data/keyboard_state.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab6/memento.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab6/memento.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab6/task.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab6/v_keyboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab6/v_keyboard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/Lab7.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/Lab7.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/class_examples.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/class_examples.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/injector.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/injector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/task.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +30,7 @@
     "Python.Lab4.executor": "Run",
     "Python.Lab5.executor": "Run",
     "Python.Lab6.executor": "Run",
+    "Python.Lab7.executor": "Run",
     "Python.lab2.executor": "Run",
     "Python.lab2_simple.executor": "Run",
     "Python.main.executor": "Run",
